@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 新規プロジェクト作成ガイド</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .step {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Monaco, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .note {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffeeba;
+            margin: 20px 0;
+        }
+        .command-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .command-block code {
+            color: #98c379;
+            background: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Pages 新規プロジェクト作成ガイド</h1>
+    
+    <div class="step">
+        <h2>1. 開発環境の準備</h2>
+        <h3>必要なツール：</h3>
+        <ul>
+            <li>Git（バージョン管理システム）</li>
+            <li>テキストエディタ（Visual Studio Code推奨）</li>
+            <li>GitHubアカウント</li>
+        </ul>
+        
+        <h3>Gitのインストールと初期設定：</h3>
+        <ol>
+            <li>Windows: <a href="https://git-scm.com/download/win">Git for Windows</a>からダウンロード・インストール</li>
+            <li>Mac: ターミナルで <code>xcode-select --install</code> を実行</li>
+            <li>初期設定：
+                <pre>
+git config --global user.name "あなたのGitHubユーザー名"
+git config --global user.email "あなたのメールアドレス"</pre>
+            </li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>2. GitHubでの準備</h2>
+        <ol>
+            <li>GitHubにログイン</li>
+            <li>新しいリポジトリを作成（「+」→「New repository」）</li>
+            <li>リポジトリ名を入力（例：my-website）</li>
+            <li>「Public」を選択</li>
+            <li>「Initialize this repository with a README」のチェックを外す</li>
+            <li>「Create repository」をクリック</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>3. ローカルプロジェクトの作成</h2>
+        <h3>プロジェクトフォルダの作成と初期化：</h3>
+        <div class="command-block">
+            <code>
+            # プロジェクトフォルダの作成と移動<br>
+            mkdir my-website<br>
+            cd my-website<br>
+            <br>
+            # Gitの初期化<br>
+            git init<br>
+            </code>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>4. 基本的なファイル構成の作成</h2>
+        <div class="command-block">
+            <code>
+            my-website/<br>
+            ├── index.html<br>
+            ├── css/<br>
+            │   └── style.css<br>
+            ├── js/<br>
+            │   └── main.js<br>
+            └── images/
+            </code>
+        </div>
+
+        <h3>index.htmlの基本構造：</h3>
+        <div class="command-block">
+            <code>
+            &lt;!DOCTYPE html&gt;<br>
+            &lt;html lang="ja"&gt;<br>
+            &lt;head&gt;<br>
+                &lt;meta charset="UTF-8"&gt;<br>
+                &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                &lt;title&gt;My Website&lt;/title&gt;<br>
+                &lt;link rel="stylesheet" href="css/style.css"&gt;<br>
+            &lt;/head&gt;<br>
+            &lt;body&gt;<br>
+                &lt;header&gt;<br>
+                    &lt;h1&gt;ようこそ&lt;/h1&gt;<br>
+                &lt;/header&gt;<br>
+                <br>
+                &lt;main&gt;<br>
+                    &lt;section&gt;<br>
+                        &lt;h2&gt;コンテンツセクション&lt;/h2&gt;<br>
+                        &lt;p&gt;ここにコンテンツを追加します。&lt;/p&gt;<br>
+                    &lt;/section&gt;<br>
+                &lt;/main&gt;<br>
+                <br>
+                &lt;footer&gt;<br>
+                    &lt;p&gt;&copy; 2025 あなたの名前&lt;/p&gt;<br>
+                &lt;/footer&gt;<br>
+                <br>
+                &lt;script src="js/main.js"&gt;&lt;/script&gt;<br>
+            &lt;/body&gt;<br>
+            &lt;/html&gt;
+            </code>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>5. GitHubへのプッシュ手順</h2>
+        <div class="command-block">
+            <code>
+            # ファイルをステージングに追加<br>
+            git add .<br>
+            <br>
+            # 最初のコミットを作成<br>
+            git commit -m "最初のコミット"<br>
+            <br>
+            # リモートリポジトリの追加<br>
+            git remote add origin https://github.com/ユーザー名/my-website.git<br>
+            <br>
+            # mainブランチに変更<br>
+            git branch -M main<br>
+            <br>
+            # GitHubにプッシュ<br>
+            git push -u origin main<br>
+            </code>
+        </div>
+
+        <div class="note">
+            <strong>注意：</strong> 
+            <ul>
+                <li>URLは自分のGitHubリポジトリのものに置き換えてください</li>
+                <li>初回プッシュ時にGitHubの認証が必要になります</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>6. GitHub Pagesの設定</h2>
+        <ol>
+            <li>GitHubのリポジトリページに移動</li>
+            <li>「Settings」タブをクリック</li>
+            <li>左メニューから「Pages」を選択</li>
+            <li>「Source」で「main」ブランチを選択</li>
+            <li>「Save」をクリック</li>
+        </ol>
+        <div class="note">
+            サイトが公開されるまで数分かかる場合があります。
+            公開後は https://ユーザー名.github.io/リポジトリ名 でアクセスできます。
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>よくあるトラブルシューティング</h2>
+        <ul>
+            <li><strong>認証エラー：</strong> 
+                GitHubの認証情報を確認し、必要に応じて個人アクセストークンを生成してください。
+            </li>
+            <li><strong>プッシュエラー：</strong>
+                リモートリポジトリのURLが正しいか確認してください。
+            </li>
+            <li><strong>ブランチエラー：</strong>
+                <code>git branch</code> で現在のブランチを確認し、必要に応じて
+                <code>git branch -M main</code> を実行してください。
+            </li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <h3>開発のベストプラクティス：</h3>
+        <ul>
+            <li>コミットメッセージは具体的に書く（何を変更したのか分かるように）</li>
+            <li>定期的にコミットを作成する（作業の区切りごと）</li>
+            <li>プッシュする前に変更内容を確認する</li>
+            <li>重要な変更の前にはバックアップを取る</li>
+        </ul>
+    </div>
+</body>
+</html>
