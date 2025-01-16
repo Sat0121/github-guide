@@ -3,226 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages 新規プロジェクト作成ガイド</title>
+    <title>GitHub Pages ガイド</title>
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #ffffff;
+            --text-color: #2d3748;
+            --code-bg: #1a1a1a;
+            --code-color: #ffffff;
+            --border-color: #e2e8f0;
+            --accent-color: #3b82f6;
+            --note-bg: #e8f0fe;
+            --note-border: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem 1.5rem;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: inherit;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+
         .step {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
         }
-        code {
-            background: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: Monaco, monospace;
+
+        .step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        .note {
-            background: #fff3cd;
-            padding: 15px;
-            border-left: 4px solid #ffeeba;
-            margin: 20px 0;
-        }
+
         .command-block {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
         }
+
         .command-block code {
-            color: #98c379;
-            background: none;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: block;
+            white-space: pre;
+        }
+
+        .note {
+            background: var(--note-bg);
+            border-left: 4px solid var(--note-border);
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note strong {
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .step {
+                padding: 1rem;
+            }
+        }
+
+        /* アクセシビリティの改善 */
+        :focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <h1>GitHub Pages 新規プロジェクト作成ガイド</h1>
-    
-    <div class="step">
-        <h2>1. 開発環境の準備</h2>
-        <h3>必要なツール：</h3>
-        <ul>
-            <li>Git（バージョン管理システム）</li>
-            <li>テキストエディタ（Visual Studio Code推奨）</li>
-            <li>GitHubアカウント</li>
-        </ul>
-        
-        <h3>Gitのインストールと初期設定：</h3>
-        <ol>
-            <li>Windows: <a href="https://git-scm.com/download/win">Git for Windows</a>からダウンロード・インストール</li>
-            <li>Mac: ターミナルで <code>xcode-select --install</code> を実行</li>
-            <li>初期設定：
-                <pre>
-git config --global user.name "あなたのGitHubユーザー名"
-git config --global user.email "あなたのメールアドレス"</pre>
-            </li>
-        </ol>
-    </div>
-
-    <div class="step">
-        <h2>2. GitHubでの準備</h2>
-        <ol>
-            <li>GitHubにログイン</li>
-            <li>新しいリポジトリを作成（「+」→「New repository」）</li>
-            <li>リポジトリ名を入力（例：my-website）</li>
-            <li>「Public」を選択</li>
-            <li>「Initialize this repository with a README」のチェックを外す</li>
-            <li>「Create repository」をクリック</li>
-        </ol>
-    </div>
-
-    <div class="step">
-        <h2>3. ローカルプロジェクトの作成</h2>
-        <h3>プロジェクトフォルダの作成と初期化：</h3>
-        <div class="command-block">
-            <code>
-            # プロジェクトフォルダの作成と移動<br>
-            mkdir my-website<br>
-            cd my-website<br>
-            <br>
-            # Gitの初期化<br>
-            git init<br>
-            </code>
+    <header>
+        <div class="container">
+            <h1>GitHub Pages ガイド</h1>
+            <p>初心者のための完全ガイド：ローカル開発からデプロイまで</p>
         </div>
-    </div>
+    </header>
 
-    <div class="step">
-        <h2>4. 基本的なファイル構成の作成</h2>
-        <div class="command-block">
-            <code>
-            my-website/<br>
-            ├── index.html<br>
-            ├── css/<br>
-            │   └── style.css<br>
-            ├── js/<br>
-            │   └── main.js<br>
-            └── images/
-            </code>
-        </div>
-
-        <h3>index.htmlの基本構造：</h3>
-        <div class="command-block">
-            <code>
-            &lt;!DOCTYPE html&gt;<br>
-            &lt;html lang="ja"&gt;<br>
-            &lt;head&gt;<br>
-                &lt;meta charset="UTF-8"&gt;<br>
-                &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
-                &lt;title&gt;My Website&lt;/title&gt;<br>
-                &lt;link rel="stylesheet" href="css/style.css"&gt;<br>
-            &lt;/head&gt;<br>
-            &lt;body&gt;<br>
-                &lt;header&gt;<br>
-                    &lt;h1&gt;ようこそ&lt;/h1&gt;<br>
-                &lt;/header&gt;<br>
-                <br>
-                &lt;main&gt;<br>
-                    &lt;section&gt;<br>
-                        &lt;h2&gt;コンテンツセクション&lt;/h2&gt;<br>
-                        &lt;p&gt;ここにコンテンツを追加します。&lt;/p&gt;<br>
-                    &lt;/section&gt;<br>
-                &lt;/main&gt;<br>
-                <br>
-                &lt;footer&gt;<br>
-                    &lt;p&gt;&copy; 2025 あなたの名前&lt;/p&gt;<br>
-                &lt;/footer&gt;<br>
-                <br>
-                &lt;script src="js/main.js"&gt;&lt;/script&gt;<br>
-            &lt;/body&gt;<br>
-            &lt;/html&gt;
-            </code>
-        </div>
-    </div>
-
-    <div class="step">
-        <h2>5. GitHubへのプッシュ手順</h2>
-        <div class="command-block">
-            <code>
-            # ファイルをステージングに追加<br>
-            git add .<br>
-            <br>
-            # 最初のコミットを作成<br>
-            git commit -m "最初のコミット"<br>
-            <br>
-            # リモートリポジトリの追加<br>
-            git remote add origin https://github.com/ユーザー名/my-website.git<br>
-            <br>
-            # mainブランチに変更<br>
-            git branch -M main<br>
-            <br>
-            # GitHubにプッシュ<br>
-            git push -u origin main<br>
-            </code>
-        </div>
-
-        <div class="note">
-            <strong>注意：</strong> 
+    <main class="container">
+        <div class="step">
+            <h2>1. 開発環境の準備</h2>
+            <h3>必要なツール：</h3>
             <ul>
-                <li>URLは自分のGitHubリポジトリのものに置き換えてください</li>
-                <li>初回プッシュ時にGitHubの認証が必要になります</li>
+                <li>Git（バージョン管理システム）</li>
+                <li>テキストエディタ（Visual Studio Code推奨）</li>
+                <li>GitHubアカウント</li>
+            </ul>
+            
+            <h3>Gitのインストールと初期設定：</h3>
+            <ol>
+                <li>Windowsの場合：<a href="https://git-scm.com/download/win" target="_blank" rel="noopener noreferrer">Git for Windows</a>からダウンロード・インストール</li>
+                <li>Macの場合：ターミナルで以下を実行
+                    <div class="command-block">
+                        <code>xcode-select --install</code>
+                    </div>
+                </li>
+                <li>初期設定：
+                    <div class="command-block">
+                        <code>git config --global user.name "あなたのGitHubユーザー名"
+git config --global user.email "あなたのメールアドレス"</code>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h2>2. GitHubでの準備</h2>
+            <ol>
+                <li>GitHubにログイン</li>
+                <li>新しいリポジトリを作成（「+」→「New repository」）</li>
+                <li>リポジトリ名を入力（例：my-website）</li>
+                <li>「Public」を選択</li>
+                <li>「Initialize this repository with a README」のチェックを外す</li>
+                <li>「Create repository」をクリック</li>
+            </ol>
+            <div class="note">
+                <strong>重要：</strong>
+                リポジトリ名は後でURLの一部となります。シンプルで覚えやすい名前を選びましょう。
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>3. ローカルプロジェクトの作成</h2>
+            <h3>プロジェクトフォルダの作成と初期化：</h3>
+            <div class="command-block">
+                <code># プロジェクトフォルダの作成と移動
+mkdir my-website
+cd my-website
+
+# Gitの初期化
+git init</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>4. 基本的なファイル構成の作成</h2>
+            <div class="command-block">
+                <code>my-website/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+└── images/</code>
+            </div>
+
+            <h3>index.htmlの基本構造：</h3>
+            <div class="command-block">
+                <code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;ようこそ&lt;/h1&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;section&gt;
+            &lt;h2&gt;コンテンツセクション&lt;/h2&gt;
+            &lt;p&gt;ここにコンテンツを追加します。&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2025 あなたの名前&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="js/main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>5. GitHubへのプッシュ手順</h2>
+            <div class="command-block">
+                <code># ファイルをステージングに追加
+git add .
+
+# 最初のコミットを作成
+git commit -m "最初のコミット"
+
+# リモートリポジトリの追加
+git remote add origin https://github.com/ユーザー名/my-website.git
+
+# mainブランチに変更
+git branch -M main
+
+# GitHubにプッシュ
+git push -u origin main</code>
+            </div>
+
+            <div class="note">
+                <strong>注意：</strong> 
+                <ul>
+                    <li>URLは自分のGitHubリポジトリのものに置き換えてください</li>
+                    <li>初回プッシュ時にGitHubの認証が必要になります</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>6. GitHub Pagesの設定</h2>
+            <ol>
+                <li>GitHubのリポジトリページに移動</li>
+                <li>「Settings」タブをクリック</li>
+                <li>左メニューから「Pages」を選択</li>
+                <li>「Source」で「main」ブランチを選択</li>
+                <li>「Save」をクリック</li>
+            </ol>
+            <div class="note">
+                サイトが公開されるまで数分かかる場合があります。
+                公開後は https://ユーザー名.github.io/リポジトリ名 でアクセスできます。
+            </div>
+        </div>
+
+        <div class="step">
+            <h2>よくあるトラブルシューティング</h2>
+            <ul>
+                <li>
+                    <strong>認証エラー：</strong> 
+                    GitHubの認証情報を確認し、必要に応じて個人アクセストークンを生成してください。
+                </li>
+                <li>
+                    <strong>プッシュエラー：</strong>
+                    リモートリポジトリのURLが正しいか確認してください。
+                </li>
+                <li>
+                    <strong>ブランチエラー：</strong>
+                    <div class="command-block">
+                        <code>git branch</code>
+                    </div>
+                    で現在のブランチを確認し、必要に応じて
+                    <div class="command-block">
+                        <code>git branch -M main</code>
+                    </div>
+                    を実行してください。
+                </li>
             </ul>
         </div>
-    </div>
 
-    <div class="step">
-        <h2>6. GitHub Pagesの設定</h2>
-        <ol>
-            <li>GitHubのリポジトリページに移動</li>
-            <li>「Settings」タブをクリック</li>
-            <li>左メニューから「Pages」を選択</li>
-            <li>「Source」で「main」ブランチを選択</li>
-            <li>「Save」をクリック</li>
-        </ol>
-        <div class="note">
-            サイトが公開されるまで数分かかる場合があります。
-            公開後は https://ユーザー名.github.io/リポジトリ名 でアクセスできます。
+        <div class="step">
+            <h2>7. ページの更新方法</h2>
+            <p>ウェブサイトの内容を更新する際は、以下の手順で行います：</p>
+            
+            <h3>1. ローカルでの更新</h3>
+            <div class="command-block">
+                <code># 変更したいファイルを編集
+# 例：index.htmlを編集した場合
+git add index.html
+
+# 変更内容をコミット
+git commit -m "ページの内容を更新"
+
+# GitHubにプッシュ
+git push origin main</code>
+            </div>
+
+            <h3>2. 複数ファイルの更新</h3>
+            <div class="command-block">
+                <code># すべての変更をステージングに追加
+git add .
+
+# 変更をコミット
+git commit -m "デザインとコンテンツを更新"
+
+# GitHubにプッシュ
+git push origin main</code>
+            </div>
+
+            <div class="note">
+                <strong>注意：</strong>
+                <ul>
+                    <li>プッシュ後、GitHub Pagesの反映まで数分かかることがあります</li>
+                    <li>ブラウザのキャッシュをクリアすると、更新後のページが表示されやすくなります</li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-    <div class="step">
-        <h2>よくあるトラブルシューティング</h2>
-        <ul>
-            <li><strong>認証エラー：</strong> 
-                GitHubの認証情報を確認し、必要に応じて個人アクセストークンを生成してください。
-            </li>
-            <li><strong>プッシュエラー：</strong>
-                リモートリポジトリのURLが正しいか確認してください。
-            </li>
-            <li><strong>ブランチエラー：</strong>
-                <code>git branch</code> で現在のブランチを確認し、必要に応じて
-                <code>git branch -M main</code> を実行してください。
-            </li>
-        </ul>
-    </div>
-
-    <div class="note">
-        <h3>開発のベストプラクティス：</h3>
-        <ul>
-            <li>コミットメッセージは具体的に書く（何を変更したのか分かるように）</li>
-            <li>定期的にコミットを作成する（作業の区切りごと）</li>
-            <li>プッシュする前に変更内容を確認する</li>
-            <li>重要な変更の前にはバックアップを取る</li>
-        </ul>
-    </div>
+    </main>
 </body>
 </html>
